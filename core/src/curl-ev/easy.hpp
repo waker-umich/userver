@@ -782,7 +782,7 @@ class easy final : public std::enable_shared_from_this<easy> {
   std::shared_ptr<std::istream> source_;
   std::string* sink_{nullptr};
   std::string post_fields_;
-  form* form_;
+  form* form_{nullptr};
   std::shared_ptr<string_list> headers_;
   std::shared_ptr<string_list> proxy_headers_;
   std::shared_ptr<string_list> http200_aliases_;

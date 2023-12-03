@@ -17,9 +17,9 @@ class Form final {
   ~Form();
 
   Form(const Form&) = delete;
-  Form(Form&&);
+  Form(Form&&) noexcept;
   Form& operator=(const Form&) = delete;
-  Form& operator=(Form&&);
+  Form& operator=(Form&&) noexcept;
 
   void AddContent(std::string_view key, std::string_view content);
   void AddContent(std::string_view key, std::string_view content,

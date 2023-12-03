@@ -9,8 +9,8 @@ namespace clients::http {
 Form::Form() : impl_(std::make_unique<curl::form>()) {}
 Form::~Form() = default;
 
-Form::Form(Form&&) = default;
-Form& Form::operator=(Form&&) = default;
+Form::Form(Form&&) noexcept = default;
+Form& Form::operator=(Form&&) noexcept = default;
 
 void Form::AddContent(std::string_view key, std::string_view content) {
   impl_->add_content(key, content);

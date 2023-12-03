@@ -234,7 +234,7 @@ void easy::reset() {
 
   orig_url_str_.clear();
   std::string{}.swap(post_fields_);  // forced memory freeing
-  form_.reset();
+  form_ = nullptr;
   if (headers_) headers_->clear();
   if (proxy_headers_) proxy_headers_->clear();
   if (http200_aliases_) http200_aliases_->clear();
@@ -356,14 +356,14 @@ void easy::set_post_fields(std::string&& post_fields, std::error_code& ec) {
         static_cast<native::curl_off_t>(post_fields_.length()), ec);
 }
 
-void easy::set_http_post(std::shared_ptr<form> form) {
+void easy::set_http_post(form* form) {
   std::error_code ec;
-  set_http_post(std::move(form), ec);
+  set_http_post(form, ec);
   throw_error(ec, "set_http_post");
 }
 
-void easy::set_http_post(std::shared_ptr<form> form, std::error_code& ec) {
-  form_ = std::move(form);
+void easy::set_http_post(form* form, std::error_code& ec) {
+  form_ = form;
 
   if (form_) {
     ec = std::error_code{
